@@ -1,10 +1,12 @@
-import { User } from '@prisma/client'
-import { IsEmail, IsString } from 'class-validator'
+import { AuthRequest } from '@shop/types'
+import { IsEmail, IsString, IsNotEmpty } from 'class-validator'
 
-export class AuthDto implements Pick<User, 'email'> {
+export class AuthDto implements AuthRequest {
 	@IsEmail()
+	@IsNotEmpty()
 	readonly email: string
 
 	@IsString()
+	@IsNotEmpty()
 	readonly password: string
 }
