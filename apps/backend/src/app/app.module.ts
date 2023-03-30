@@ -7,6 +7,7 @@ import { AppService } from './app.service'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { getJWTConfig } from './core/configs'
 import { JwtModule } from '@nestjs/jwt'
+import { CategoryModule } from './category/category.module'
 
 @Module({
 	imports: [
@@ -18,6 +19,7 @@ import { JwtModule } from '@nestjs/jwt'
 		}),
 		AuthModule,
 		UsersModule,
+		CategoryModule,
 	],
 	controllers: [AppController],
 	providers: [PrismaService, AppService],

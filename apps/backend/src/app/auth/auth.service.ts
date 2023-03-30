@@ -44,7 +44,7 @@ export class AuthService {
 
 	async userWithToken(user: Omit<User, 'hash'>): Promise<UserWithToken> {
 		return {
-			...user,
+			user,
 			token: await this.jwtService.signAsync(user),
 		}
 	}

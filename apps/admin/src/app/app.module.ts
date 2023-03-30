@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core'
+import { APP_INITIALIZER, NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { HttpClientModule } from '@angular/common/http'
 import { BrowserModule } from '@angular/platform-browser'
@@ -8,8 +8,9 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { AppComponent } from './app.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { AuthState, AUTH_STATE } from './auth/state/auth.state'
-import { RxState } from '@rx-angular/state'
+import { provideEffectsManager } from '@ngneat/effects-ng'
+import { appInitializer } from './app.initializer'
+import { Actions } from '@ngneat/effects'
 
 const routes: Routes = [
 	{
@@ -36,7 +37,16 @@ const routes: Routes = [
 		MatIconModule,
 		BrowserAnimationsModule,
 	],
-	providers: [{ provide: AUTH_STATE, useFactory: () => new RxState<AuthState>() }],
+	providers: [
+		provideEffectsManager(),
+		Actions,
+		{
+			provide: APP_INITIALIZER,
+			multi: true,
+			useFactory: () => appInitializer,
+			deps: [Actions],
+		},
+	],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}

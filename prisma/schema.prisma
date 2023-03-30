@@ -15,5 +15,18 @@ model User {
   email     String   @unique
   hash      String   @map("password_hash")
   username  String?
+  role      Role     @default(User)
   createdAt DateTime @default(now())
+}
+
+enum Role {
+  User
+  Admin
+}
+
+model Category {
+  id           String  @id @default(uuid()) @db.Uuid
+  title        String
+  descriptions String?
+  icon         String?
 }
