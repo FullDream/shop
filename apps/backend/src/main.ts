@@ -3,7 +3,7 @@
  * This is only a minimal backend to get started.
  */
 
-import { HttpStatus, Logger } from '@nestjs/common'
+import { HttpStatus, Logger, ValidationPipe } from '@nestjs/common'
 import { HttpAdapterHost, NestFactory } from '@nestjs/core'
 
 import { AppModule } from './app/app.module'
@@ -19,6 +19,7 @@ async function bootstrap(): Promise<void> {
 		new PrismaClientExceptionFilter(httpAdapter, { P2023: HttpStatus.BAD_REQUEST }),
 	)
 
+	app.useGlobalPipes(new ValidationPipe({ transform: true }))
 	await app.listen(3000)
 
 	Logger.log(`🚀 Application is running on: http://localhost:${3000}/${globalPrefix}`)

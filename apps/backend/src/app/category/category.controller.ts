@@ -6,6 +6,7 @@ import {
 	Param,
 	Patch,
 	Post,
+	Query,
 	UsePipes,
 	ValidationPipe,
 } from '@nestjs/common'
@@ -13,6 +14,8 @@ import { Category } from '@prisma/client'
 import { CategoryCreateDto } from './dto/category-create.dto'
 import { CategoryUpdateDto } from './dto/category-update.dto'
 import { EntityService } from '../common/entity'
+import { DataWithPagination } from '@shop/types'
+import { PaginationDto } from '../common/pagination'
 
 @Controller('categories')
 export class CategoryController {
@@ -21,8 +24,8 @@ export class CategoryController {
 	) {}
 
 	@Get()
-	findAll(): Promise<Category[]> {
-		return this.entityService.findAll()
+	findAll(@Query() queryParams: PaginationDto): Promise<DataWithPagination<Category>> {
+		return this.entityService.findAll(queryParams)
 	}
 
 	@Get(':id')
@@ -30,13 +33,11 @@ export class CategoryController {
 		return this.entityService.find(id)
 	}
 
-	@UsePipes(new ValidationPipe())
 	@Post()
 	create(@Body() data: CategoryCreateDto): Promise<Category> {
 		return this.entityService.create(data)
 	}
 
-	@UsePipes(new ValidationPipe())
 	@Patch(':id')
 	update(@Param('id') id: string, @Body() data: CategoryUpdateDto): Promise<Category> {
 		return this.entityService.update(id, data)
