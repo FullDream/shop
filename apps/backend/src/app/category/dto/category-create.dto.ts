@@ -1,14 +1,15 @@
 import { CategoryCreateRequest } from '@shop/types'
-import { IsNotEmpty, IsString } from 'class-validator'
+import { IsOptional, IsString } from 'class-validator'
 
 export class CategoryCreateDto implements CategoryCreateRequest {
 	@IsString()
-	@IsNotEmpty()
 	readonly title: string
 
 	@IsString()
+	@IsOptional()
 	readonly descriptions?: string
 
 	@IsString()
+	@IsOptional()
 	readonly icon?: string
 }

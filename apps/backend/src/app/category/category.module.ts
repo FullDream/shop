@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common'
-import { PrismaService } from '../common/services'
 import { CategoryController } from './category.controller'
-import { CategoryService } from './category.service'
+import { BaseEntityService, EntityService, MODEL_NAME_TOKEN } from '../common/entity'
 
 @Module({
 	controllers: [CategoryController],
-	providers: [CategoryService, PrismaService],
+	providers: [
+		{ provide: EntityService, useClass: BaseEntityService },
+		{ provide: MODEL_NAME_TOKEN, useValue: 'category' },
+	],
 })
 export class CategoryModule {}
