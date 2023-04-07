@@ -1,15 +1,4 @@
-import {
-	Body,
-	Controller,
-	Delete,
-	Get,
-	Param,
-	Patch,
-	Post,
-	Query,
-	UsePipes,
-	ValidationPipe,
-} from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common'
 import { Category } from '@prisma/client'
 import { CategoryCreateDto } from './dto/category-create.dto'
 import { CategoryUpdateDto } from './dto/category-update.dto'
