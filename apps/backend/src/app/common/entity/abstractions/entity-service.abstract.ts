@@ -2,7 +2,11 @@ import { PrismaService } from 'nestjs-prisma'
 import { DataWithPagination } from '@shop/types'
 import { PaginationDto, PaginationService } from '../../pagination'
 
-export abstract class EntityService<Entity, CreateDto, UpdateDto = CreateDto> {
+export abstract class EntityService<
+	Entity,
+	CreateDto = { slug: string; id: string },
+	UpdateDto = CreateDto,
+> {
 	constructor(
 		protected readonly prisma: PrismaService,
 		protected entityName: string,
@@ -13,11 +17,11 @@ export abstract class EntityService<Entity, CreateDto, UpdateDto = CreateDto> {
 
 	abstract findAll(paginationDto?: PaginationDto): Promise<DataWithPagination<Entity>>
 
-	abstract find(id: string): Promise<Entity>
+	abstract find(slug: string): Promise<Entity>
 
 	abstract create(data: CreateDto): Promise<Entity>
 
-	abstract update(id: string, data: UpdateDto): Promise<Entity>
+	abstract update(slug: string, data: UpdateDto): Promise<Entity>
 
-	abstract delete(id: string): Promise<Entity>
+	abstract delete(slug: string): Promise<Entity>
 }

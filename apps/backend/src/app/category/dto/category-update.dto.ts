@@ -8,6 +8,10 @@ export class CategoryUpdateDto implements CategoryUpdateRequest {
 
 	@IsString()
 	@IsOptional()
+	readonly slug?: string
+
+	@IsString()
+	@IsOptional()
 	readonly descriptions?: string
 
 	@IsString()

@@ -7,7 +7,11 @@ export class CategoryCreateDto implements CategoryCreateRequest {
 
 	@IsString()
 	@IsOptional()
-	readonly descriptions?: string
+	readonly slug?: string
+
+	@IsString()
+	@IsOptional()
+	readonly description?: string
 
 	@IsString()
 	@IsOptional()

@@ -25,8 +25,9 @@ enum Role {
 }
 
 model Category {
-  id           String  @id @default(uuid()) @db.Uuid
-  title        String
-  descriptions String?
-  icon         String?
+  id          String  @id @default(uuid()) @db.Uuid
+  slug        String  @unique @default(uuid())
+  title       String
+  description String?
+  icon        String?
 }
