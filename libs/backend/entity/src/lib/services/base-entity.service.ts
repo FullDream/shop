@@ -3,8 +3,8 @@ import { EntityService } from '../abstractions'
 import { MODEL_NAME_TOKEN } from '../tokens'
 import { PrismaService } from 'nestjs-prisma'
 import { DataWithPagination } from '@shop/types'
-import { PaginationDto, PaginationService } from '../../pagination'
 import slugify from 'slugify'
+import { PaginationService, PaginationDto } from '@shop/backend/pagination'
 
 @Injectable()
 export class BaseEntityService<Entity, CreateDto, UpdateDto> extends EntityService<

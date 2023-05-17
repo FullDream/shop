@@ -3,7 +3,7 @@ import { EntityService } from './abstractions'
 import { BaseEntityService } from './services'
 import { MODEL_NAME_TOKEN } from './tokens'
 import { EntityModuleConfig } from './types'
-import { PaginationModule } from '../pagination'
+import { PaginationModule } from '@shop/backend/pagination'
 
 @Module({})
 export class EntityModule {

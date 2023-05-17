@@ -2,9 +2,9 @@ import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestj
 import { Category } from '@prisma/client'
 import { CategoryCreateDto } from './dto/category-create.dto'
 import { CategoryUpdateDto } from './dto/category-update.dto'
-import { EntityService } from '../common/entity'
 import { DataWithPagination } from '@shop/types'
-import { PaginationDto } from '../common/pagination'
+import { EntityService } from '@shop/backend/entity'
+import { PaginationDto } from '@shop/backend/pagination'
 
 @Controller('categories')
 export class CategoryController {

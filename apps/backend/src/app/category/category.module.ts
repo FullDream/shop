@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 import { CategoryController } from './category.controller'
-import { EntityModule } from '../common/entity'
+import { EntityModule } from '@shop/backend/entity'
 
 @Module({
 	imports: [EntityModule.forFeature({ prismaModelName: 'category' })],
