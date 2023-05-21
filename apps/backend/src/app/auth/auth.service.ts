@@ -5,8 +5,8 @@ import { genSalt, hash, compare } from 'bcrypt'
 import { JwtService } from '@nestjs/jwt'
 import { ConfigService } from '@nestjs/config'
 import { AuthDto } from './dto/auth.dto'
-import { exclude } from '../common/utils'
 import { UserWithToken } from '@shop/types'
+import { exclude } from '@shop/common/utils'
 
 @Injectable()
 export class AuthService {

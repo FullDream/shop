@@ -1,17 +1,18 @@
 import { Inject, Injectable } from '@nestjs/common'
+import { PaginationDto, PaginationService } from '@shop/backend/pagination'
+import { DataWithPagination } from '@shop/types'
+import { PrismaService } from 'nestjs-prisma'
+import slugify from 'slugify'
 import { EntityService } from '../abstractions'
 import { MODEL_NAME_TOKEN } from '../tokens'
-import { PrismaService } from 'nestjs-prisma'
-import { DataWithPagination } from '@shop/types'
-import slugify from 'slugify'
-import { PaginationService, PaginationDto } from '@shop/backend/pagination'
+import { EntityCreate } from '../types/entity-create.interface'
 
 @Injectable()
-export class BaseEntityService<Entity, CreateDto, UpdateDto> extends EntityService<
+export class BaseEntityService<
 	Entity,
-	CreateDto,
-	UpdateDto
-> {
+	CreateDto extends EntityCreate,
+	UpdateDto,
+> extends EntityService<Entity, CreateDto, UpdateDto> {
 	constructor(
 		protected readonly prisma: PrismaService,
 		@Inject(MODEL_NAME_TOKEN) protected entityName: string,
@@ -28,7 +29,10 @@ export class BaseEntityService<Entity, CreateDto, UpdateDto> extends EntityServi
 	}
 
 	create(data: CreateDto): Promise<Entity> {
-		return this.prisma[this.entityName].create({ data })
+		let slug = data.slug
+		if (!data.slug) slug = slugify(data.title, { lower: true }) + Date.now()
+
+		return this.prisma[this.entityName].create({ data: { ...data, slug } })
 	}
 
 	update(slug: string, data: UpdateDto): Promise<Entity> {

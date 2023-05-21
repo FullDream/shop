@@ -2,11 +2,7 @@ import { PrismaService } from 'nestjs-prisma'
 import { DataWithPagination } from '@shop/types'
 import { PaginationService, PaginationDto } from '@shop/backend/pagination'
 
-export abstract class EntityService<
-	Entity,
-	CreateDto = { slug: string; id: string },
-	UpdateDto = CreateDto,
-> {
+export abstract class EntityService<Entity, CreateDto, UpdateDto = CreateDto> {
 	constructor(
 		protected readonly prisma: PrismaService,
 		protected entityName: string,

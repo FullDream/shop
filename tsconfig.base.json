@@ -17,6 +17,7 @@
 		"paths": {
 			"@shop/backend/entity": ["libs/backend/entity/src/index.ts"],
 			"@shop/backend/pagination": ["libs/backend/pagination/src/index.ts"],
+			"@shop/common/utils": ["libs/common/utils/src/index.ts"],
 			"@shop/types": ["libs/types/src/index.ts"]
 		}
 	},
